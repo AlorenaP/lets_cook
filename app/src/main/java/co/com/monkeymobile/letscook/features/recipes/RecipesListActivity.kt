@@ -31,7 +31,7 @@ class RecipesListActivity : BaseActivity(), RecipesAdapter.RecipeListener {
             adapter = recipesAdapter
         }
 
-        viewModel.recipes.observe(this@RecipesListActivity, Observer { onItemsResponse(it) })
+        viewModel.recipes.observe(this@RecipesListActivity, Observer { onResponse(it) })
         viewModel.failure.observe(this@RecipesListActivity, Observer { onFailure(it) })
         viewModel.fetchItems()
         showIndeterminateModalDialog()
@@ -39,11 +39,11 @@ class RecipesListActivity : BaseActivity(), RecipesAdapter.RecipeListener {
 
     override fun onRecipeClick(recipe: Recipe) {
         val intent = Intent(this, RecipeDetailActivity::class.java)
-            .apply { putExtra(KEY_ID, recipe.id) }
+            .apply { putExtra(KEY_ID, recipe.id.toString()) }
         startActivity(intent)
     }
 
-    private fun onItemsResponse(response: Response<List<Recipe>>) {
+    private fun onResponse(response: Response<List<Recipe>>) {
         hideIndeterminateModalDialog()
         if (response.isSuccessful) {
             val recipes = response.body()
@@ -56,13 +56,4 @@ class RecipesListActivity : BaseActivity(), RecipesAdapter.RecipeListener {
             Toast.makeText(this, getString(R.string.network_error), Toast.LENGTH_LONG).show()
         }
     }
-
-    private fun onFailure(failure: Boolean) {
-        hideIndeterminateModalDialog()
-        if (failure) {
-            Toast.makeText(this, getString(R.string.network_error), Toast.LENGTH_LONG).show()
-        }
-    }
-
-
 }

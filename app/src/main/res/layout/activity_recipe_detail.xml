@@ -6,4 +6,35 @@
     android:layout_height="match_parent"
     tools:context="co.com.monkeymobile.letscook.features.recipe_detail.RecipeDetailActivity">
 
+    <ImageView
+        android:id="@+id/recipeImage"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/height_recipe_image"
+        android:contentDescription="@string/empty_string"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/starsContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_recipe_title"
+        android:gravity="center"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/recipeImage" />
+
+    <TextView
+        android:id="@+id/recipeInstructions"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_lateral_recipe_title"
+        android:layout_marginTop="@dimen/margin_recipe_title"
+        android:layout_marginEnd="@dimen/margin_lateral_recipe_title"
+        app:layout_constraintEnd_toEndOf="@+id/starsContainer"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/starsContainer" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

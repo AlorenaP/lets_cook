@@ -1,6 +1,7 @@
 package co.com.monkeymobile.letscook.core.platform
 
 import android.app.AlertDialog
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import co.com.monkeymobile.letscook.AndroidApplication
 import co.com.monkeymobile.letscook.R
@@ -29,8 +30,16 @@ abstract class BaseActivity : AppCompatActivity() {
         showIndeterminateModalDialog()
     }
 
-    fun hideIndeterminateModalDialog() = indeterminateDialog?.cancel().also { indeterminateDialog = null }
-        ?: Unit
+    fun hideIndeterminateModalDialog() =
+        indeterminateDialog?.cancel().also { indeterminateDialog = null }
+            ?: Unit
+
+    fun onFailure(failure: Boolean) {
+        hideIndeterminateModalDialog()
+        if (failure) {
+            Toast.makeText(this, getString(R.string.network_error), Toast.LENGTH_LONG).show()
+        }
+    }
 
     override fun onStop() {
         super.onStop()
