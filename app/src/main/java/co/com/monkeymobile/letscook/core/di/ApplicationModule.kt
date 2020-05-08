@@ -2,6 +2,9 @@ package co.com.monkeymobile.letscook.core.di
 
 import android.content.Context
 import co.com.monkeymobile.letscook.AndroidApplication
+import co.com.monkeymobile.letscook.features.recipe_detail.GetRecipeDetailsRepo
+import co.com.monkeymobile.letscook.features.recipe_detail.GetRecipeDetailsRepoImpl
+import co.com.monkeymobile.letscook.features.recipe_detail.GetRecipeDetailsService
 import co.com.monkeymobile.letscook.features.recipes.*
 import dagger.Module
 import dagger.Provides
@@ -25,9 +28,17 @@ class ApplicationModule(private val application: AndroidApplication) {
 
     @Provides
     @Singleton
-    fun provideGetItemService(retrofit: Retrofit) = GetRecipesService(retrofit)
+    fun provideGetRecipesService(retrofit: Retrofit) = GetRecipesService(retrofit)
 
     @Provides
     @Singleton
-    fun provideGetItemRepo(service: GetRecipesService): GetRecipesRepo = GetRecipesRepoImpl(service)
+    fun provideGetRecipesRepo(service: GetRecipesService): GetRecipesRepo = GetRecipesRepoImpl(service)
+
+    @Provides
+    @Singleton
+    fun provideGetRecipeDetailsService(retrofit: Retrofit) = GetRecipeDetailsService(retrofit)
+
+    @Provides
+    @Singleton
+    fun provideGetRecipeDetailsRepo(service: GetRecipeDetailsService): GetRecipeDetailsRepo = GetRecipeDetailsRepoImpl(service)
 }

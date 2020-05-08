@@ -4,4 +4,5 @@
     <string name="image">This is an image</string>
     <string name="wait_a_moment">Please, wait a moment</string>
     <string name="network_error">Error retrieving data</string>
+    <string name="empty_string" />
 </resources>

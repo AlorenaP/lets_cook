@@ -1,11 +1,14 @@
 package co.com.monkeymobile.letscook.features.recipes
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import co.com.monkeymobile.letscook.R
 import co.com.monkeymobile.letscook.core.platform.BaseActivity
+import co.com.monkeymobile.letscook.core.utils.KEY_ID
+import co.com.monkeymobile.letscook.features.recipe_detail.RecipeDetailActivity
 import kotlinx.android.synthetic.main.recipes_list_activity.*
 import retrofit2.Response
 import javax.inject.Inject
@@ -35,7 +38,9 @@ class RecipesListActivity : BaseActivity(), RecipesAdapter.RecipeListener {
     }
 
     override fun onRecipeClick(recipe: Recipe) {
-        println(recipe)
+        val intent = Intent(this, RecipeDetailActivity::class.java)
+            .apply { putExtra(KEY_ID, recipe.id) }
+        startActivity(intent)
     }
 
     private fun onItemsResponse(response: Response<List<Recipe>>) {
