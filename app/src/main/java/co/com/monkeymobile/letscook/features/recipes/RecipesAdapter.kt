@@ -18,10 +18,10 @@ class RecipesAdapter(private var recipes: List<Recipe>, private val listener: Re
     class ItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val adapterContainer =
             itemView.findViewById<ConstraintLayout>(R.id.adapterContainer)
-        private val attributeTwo = itemView.findViewById<TextView>(R.id.recipeTitle)
+        private val recipeTitle = itemView.findViewById<TextView>(R.id.recipeTitle)
 
         fun bind(recipe: Recipe, listener: RecipeListener) {
-            attributeTwo.text = recipe.title
+            recipeTitle.text = recipe.title
             adapterContainer.setOnClickListener { listener.onRecipeClick(recipe) }
         }
     }

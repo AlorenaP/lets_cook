@@ -21,9 +21,8 @@ class RecipesListActivity : BaseActivity(), RecipesAdapter.RecipeListener {
         setContentView(R.layout.recipes_list_activity)
         appComponent.inject(this)
 
-        val items = emptyList<Recipe>()
         val adapterLayoutManager = LinearLayoutManager(this)
-        recipesAdapter = RecipesAdapter(items, this)
+        recipesAdapter = RecipesAdapter(emptyList(), this)
         recycler.apply {
             layoutManager = adapterLayoutManager
             adapter = recipesAdapter
@@ -42,11 +41,11 @@ class RecipesListActivity : BaseActivity(), RecipesAdapter.RecipeListener {
     private fun onItemsResponse(response: Response<List<Recipe>>) {
         hideIndeterminateModalDialog()
         if (response.isSuccessful) {
-            val items = response.body()
-            if (items == null) {
+            val recipes = response.body()
+            if (recipes == null) {
                 Toast.makeText(this, getString(R.string.network_error), Toast.LENGTH_LONG).show()
             } else {
-                recipesAdapter.updateContent(items)
+                recipesAdapter.updateContent(recipes)
             }
         } else {
             Toast.makeText(this, getString(R.string.network_error), Toast.LENGTH_LONG).show()
